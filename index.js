@@ -11,6 +11,21 @@ const io = require('socket.io')(http, {
   }
 })
 
+io.on('connection', (socket) => {
+  console.log('A user connected.');
+
+  socket.on('newBet', (newBet) => {
+    console.log('New bet received:', newBet);
+
+    // Broadcast the new bet data to all connected clients
+    io.emit('betAdded', newBet);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('A user disconnected.');
+  });
+});
+
 let plusOddsArray = []
 let minusOddsArray = []
 
