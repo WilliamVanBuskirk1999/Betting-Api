@@ -21,6 +21,15 @@ io.on('connection', (socket) => {
 
   socket.on('nameAdded', (name) => {
     io.emit('addNameToLeaderBoard', name)
+    console.log(name)
+  })
+
+  socket.on('updateLeaderBoard', (name) => {
+    io.emit('leaderBoardUpdateBackEnd', name)
+  })
+
+  socket.on('updateOpponentsResults', (bets) => {
+    io.emit('updateOpponentsResultsBackEnd', bets)
   })
 
   socket.on('disconnect', () => {
